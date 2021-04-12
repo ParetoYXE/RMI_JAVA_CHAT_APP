@@ -1,3 +1,7 @@
+//Liam Iverson
+
+
+//Client Core Application
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -7,6 +11,7 @@ import java.util.Scanner;
 
 public class Client {
 	public static void main(String[] args) throws MalformedURLException, RemoteException, NotBoundException {
+		//All the required url calls as defined by the API
 		enterServer service = (enterServer) Naming.lookup("rmi://localhost:5099/enterServer");
 		listRooms service2 = (listRooms) Naming.lookup("rmi://localhost:5099/listRooms");
 		addNewRoom service3 = (addNewRoom) Naming.lookup("rmi://localhost:5099/addRoom");
@@ -30,6 +35,8 @@ public class Client {
 		name = sc.nextLine();
 		
 		
+		
+		//main loop, stateless, only requires representations from the server to operate
 		while(exit < 1) {
 			System.out.println("Welcome " + name + " please select a room below. Or enter CREATE to create a new room");
 			System.out.println(service2.listChatRooms(name));
@@ -38,13 +45,15 @@ public class Client {
 			
 			System.out.println(currentRoom);
 			
+			//Logic to create room 
 			if(currentRoom.equals("CREATE")) {
 				System.out.println("ENTER THE NEW ROOM NAME: ");
 				String newRoom = sc.nextLine();
-				
+				//API stateless call
 				System.out.println(service3.echo(newRoom));
 				
 			}else {
+				//Internal room logic
 				while(inRoom < 1 ) {
 					System.out.println(currentRoom);
 					ArrayList<String>chats = service4.getRoom(currentRoom);
