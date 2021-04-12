@@ -24,3 +24,16 @@ SERVANT NAME: SERVANT URL : SERVANT FUNCTIONS
 LoadRoom service4 = (LoadRoom) Naming.lookup("rmi://localhost:5099/loadRoom");
 
 ArrayList<String>chats = service4.getRoom(currentRoom);
+  
+  
+  
+  
+  
+  
+# WHAT MAKES THIS RESTFUL?
+
+- Uniform standardized API independent of the server 
+- Stateless interaction, at no point does the server ever preserve anything to do with the clients communication history it only intakes state data regarding either chatroom messages or new chatroom additions and writes this data to the database
+- Layered System, the client has no information on the operating backend of the server and only recieves states(represented as ArrayLists) regarding the current chat messages and available rooms. This data can be updated to be stored anywhere server side, including another server, and I have included a dummy function if individuals wish to implement this functionality. 
+- Standard Server/Client architecture and interface
+
